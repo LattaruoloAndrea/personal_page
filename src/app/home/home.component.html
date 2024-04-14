@@ -1,9 +1,17 @@
-@if(false){<p>home works!</p>}
-@else{
-    <p>CASA WORKS</p>
+<app-cube class="cube"></app-cube>
+<app-navbar style="height: 100px;width: 100%;"></app-navbar>
+<!-- <nav style="background-color: aqua;"> 
+    <ul>
+        @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+            <li><a href="#{{item}}">{{item}}</a></li> 
+
+        }
+    </ul> 
+  </nav>  -->
+<div style="height: 400px;width: 100%;"></div>
+@for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+    <section id="{{item}}">
+        <div style="background-color: rgba(255, 228, 196, 0.479); width: 200px;height: 200px; border: solid 1px rgb(185, 184, 184); margin-bottom: 100px;margin-left: 400px;">ciao {{item}}</div>
+    </section>
+    
 }
-<!-- <p *ngif="true">sdasdsadsd</p> -->
-@for(p of [1,2,3,4]; track p){
-    <p>{{p}}</p>
-}
-<app-cube></app-cube>
