@@ -1,23 +1,43 @@
-<div style="height: 80px;background-color: blue;">
-    <!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!-- <span>{{"Responsive Navigation" | translate}}</span> -->
+      <!-- <span>Responsive Navigation</span>
+      <span class="menu-spacer"></span>
+      <div fxShow="true" fxHide.lt-md>
+        <a href="#1" mat-button>Menu Item 1</a>
+        <a href="#2" mat-button>Menu Item 2</a>
+        <a href="#3" mat-button>Menu Item 3</a>
+        <a href="#4" mat-button>Menu Item 4</a>
+        <a href="#5" mat-button>Menu Item 5</a>
+        <a href="#6" mat-button>Menu Item 6</a>
+      </div>
+      <mat-slide-toggle>lide</mat-slide-toggle> -->
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- <mat-toolbar color="primary" style="background-color: beige;">
       <mat-toolbar-row>
-        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <button mat-icon-button>
           <mat-icon>menu</mat-icon>
         </button>
         <span>Responsive Navigation</span>
         <span class="menu-spacer"></span>
         <div fxShow="true" fxHide.lt-md>
-          <a href="#" mat-button>Menu Item 1</a>
-          <a href="#" mat-button>Menu Item 2</a>
-          <a href="#" mat-button>Menu Item 3</a>
-          <a href="#" mat-button>Menu Item 4</a>
-          <a href="#" mat-button>Menu Item 5</a>
-          <a href="#" mat-button>Menu Item 6</a>
+          <a href="#1" mat-button>Menu Item 1</a>
+          <a href="#2" mat-button>Menu Item 2</a>
+          <a href="#3" mat-button>Menu Item 3</a>
+          <a href="#4" mat-button>Menu Item 4</a>
+          <a href="#5" mat-button>Menu Item 5</a>
+          <a href="#6" mat-button>Menu Item 6</a>
         </div>
+        <mat-slide-toggle>lide</mat-slide-toggle>
       </mat-toolbar-row>
-    </mat-toolbar>
-  
-    <mat-sidenav-container fxFlexFill>
+    </mat-toolbar> -->
+
+<!-- <mat-sidenav-container fxFlexFill>
       <mat-sidenav #sidenav>
         <mat-nav-list>
           <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
@@ -31,5 +51,3 @@
       </mat-sidenav>
       <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>
     </mat-sidenav-container> -->
-  </div>
-  

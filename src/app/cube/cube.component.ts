@@ -134,7 +134,7 @@ export class CubeComponent implements OnInit, AfterViewInit {
       requestAnimationFrame(render);
       window.addEventListener('resize',()=>{
         component.canvas.width = window.innerWidth;
-        component.canvas.height = 800;
+        component.canvas.height = window.innerHeight;
         // console.log(component.canvas.width,component.canvas.height);
         component.camera.aspect = component.getWidth()/component.getHeight();
         component.renderer.setSize(component.getWidth(),component.getHeight());
