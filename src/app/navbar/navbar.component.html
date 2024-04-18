@@ -1,9 +1,19 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+    <mat-toolbar-row style="display: felx;justify-content: space-between;align-items: center;">
+      <button mat-icon-button color="accent">
         <mat-icon>menu</mat-icon>
       </button>
-      <!-- <span>{{"Responsive Navigation" | translate}}</span> -->
+      <span>{{"Responsive Navigation"}}</span>
+      <div class="theme-control">
+        <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
+        <button mat-icon-button>
+          @if(themeService.themeSignal() == "dark-theme"){
+            <mat-icon color="accent">bedtime</mat-icon>
+          }@else{
+            <mat-icon color="accent">brightness_5</mat-icon>
+          }
+        </button>
+      </div>
       <!-- <span>Responsive Navigation</span>
       <span class="menu-spacer"></span>
       <div fxShow="true" fxHide.lt-md>
