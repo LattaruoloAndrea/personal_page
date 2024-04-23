@@ -5,14 +5,21 @@
     z-index: -1;
 }
 
-.spacer_model{
-    height: 400px;
+.navbar {
+    position: fixed;
     width: 100%;
-    background-color: antiquewhite;
+    z-index: 100;
 }
 
-.content_viewer{
+.spacer_model {
+    height: 400px;
+    width: 100%;
+    z-index: -20;
+    /* background-color: antiquewhite; */
+}
+
+.content_viewer {
     width: 100%;
     height: 100%;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
 }

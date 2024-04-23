@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
+
+  // @ViewChild('widgetsContent', { read: ElementRef }) 
+  // private widgetsContent: ElementRef<any>;
+
+  public scrollRight(): void {
+    // this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+  }
+
+  public scrollLeft(): void {
+    // this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+  }
 
 }
