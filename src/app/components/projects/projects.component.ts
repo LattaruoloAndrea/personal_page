@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
+  // https://stackoverflow.com/questions/48955095/horizontal-scroll-using-buttons-on-angular2
 
   // @ViewChild('widgetsContent', { read: ElementRef }) 
   // private widgetsContent: ElementRef<any>;
