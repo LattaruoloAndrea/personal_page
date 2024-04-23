@@ -9,11 +9,16 @@
         }
     </ul> 
   </nav>  -->
-<div style="height: 400px;width: 100%;"></div>
-@for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+<div class="spacer_model"></div>
+<div class="content_viewer">
+    <app-about></app-about>
+    <app-projects></app-projects>
+    <app-contact></app-contact>
+</div>
+<!-- @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
     <section id="{{item}}" style="height: 100%;width: 100%;">
         <div style="height: 120px;width: 100%;"></div>
         <div style="background-color: rgba(255, 228, 196, 0.479); width: 200px;height: 200px; border: solid 1px rgb(185, 184, 184);margin-top: 100px; margin-bottom: 100px;margin-left: 400px;">ciao {{item}}</div>
     </section>
     
-}
+} -->

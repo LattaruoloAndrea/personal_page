@@ -6,7 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
-import { ThemeService } from '../services/theme.service.service';
+import { ThemeService } from '../../services/theme.service.service';
 // import { NgModule } from '@angular/core';
 // import { FlexLayoutModule } from "@angular/flex-layout";
 @Component({
@@ -18,7 +18,6 @@ import { ThemeService } from '../services/theme.service.service';
 })
 export class NavbarComponent {
   themeService: ThemeService = inject(ThemeService);
-
   toggleTheme(){
     this.themeService.updateTheme(this.themeService.themeSignal());
   }

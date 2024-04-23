@@ -4,3 +4,15 @@
     width: 100%;
     z-index: -1;
 }
+
+.spacer_model{
+    height: 400px;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.content_viewer{
+    width: 100%;
+    height: 100%;
+    background-color: blueviolet;
+}

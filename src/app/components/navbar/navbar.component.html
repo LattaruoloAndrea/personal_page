@@ -1,19 +1,28 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row style="display: felx;justify-content: space-between;align-items: center;">
-      <button mat-icon-button color="accent">
+    <mat-toolbar-row class="navbar">
+      <canvas style="background-color: aqua; width: 48px;height: 48px;">
+
+      </canvas>
+      <!-- <button mat-icon-button color="accent">
         <mat-icon>menu</mat-icon>
-      </button>
-      <span>{{"Responsive Navigation"}}</span>
-      <div class="theme-control">
-        <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
-        <button mat-icon-button>
-          @if(themeService.themeSignal() == "dark-theme"){
-            <mat-icon color="accent">bedtime</mat-icon>
-          }@else{
-            <mat-icon color="accent">brightness_5</mat-icon>
-          }
-        </button>
+      </button> -->
+      <span></span>
+      <div class="navbar">
+        <a href="#about" class="sectionsStyle sectionsDimension">{{"About"}}</a>
+        <a href="#projects" class="sectionsStyle sectionsDimension">{{"Projects"}}</a>
+        <a href="#contacts" class="sectionsStyle sectionsDimension">{{"Contancts"}}</a>
+        <div class="theme-control">
+          <!-- <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle> -->
+          <button mat-icon-button (click)="toggleTheme()">
+            @if(themeService.themeSignal() == "dark-theme"){
+              <mat-icon color="accent">bedtime</mat-icon>
+            }@else{
+              <mat-icon color="accent">brightness_5</mat-icon>
+            }
+          </button>
+        </div>
       </div>
+
       <!-- <span>Responsive Navigation</span>
       <span class="menu-spacer"></span>
       <div fxShow="true" fxHide.lt-md>

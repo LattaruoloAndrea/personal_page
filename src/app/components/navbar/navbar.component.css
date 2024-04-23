@@ -1,0 +1,36 @@
+.navbar {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-right: 0px;
+}
+
+.sectionsStyle{
+    text-decoration: none;
+    color: black;
+    font: optional;
+}
+.sectionsDimension{
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size:x-large;
+    font-weight: bolder;
+}
+
+@media screen and (max-width:480px) {
+    .sectionsDimension{
+        margin-right: 5px;
+        margin-left: 5px;
+        font-size:medium;
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width:330px) {
+    .sectionsDimension{
+        margin-right: 2px;
+        margin-left: 2px;
+        font-size: x-small;
+        font-weight: bold;
+    }
+}
