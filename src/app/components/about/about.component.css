@@ -1,5 +1,6 @@
 .moonboard{
     height: 100%;
+    padding-top: 64px;
     /* min-height: 200px; */
 }
 

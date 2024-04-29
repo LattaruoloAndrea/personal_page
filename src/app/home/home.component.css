@@ -12,7 +12,8 @@
 }
 
 .spacer_model {
-    height: 400px;
+    height: 100vh;
+    /* min-height: 400px; */
     width: 100%;
     z-index: -20;
     /* background-color: antiquewhite; */
@@ -20,6 +21,10 @@
 
 .content_viewer {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     /* background-color: blueviolet; */
+}
+.view_height{
+    height: 100vh;
+    /* margin-top: 64px; */
 }

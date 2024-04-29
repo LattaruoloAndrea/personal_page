@@ -1,13 +1,82 @@
+.container{
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+  position:relative;
+  background-color: rgb(52, 185, 185);
+  padding-top: 64px;
+}
+
 .info-widget {
-    width: 31.75%;
-    border: 1px solid black;
+    width: 90vh;
+    margin: 10px;
+    border: 4px solid black;
     display: inline-block;
+    background-color: blue;
+  }
+
+  .left-button{
+    float: left;
+    /* position: absolute; */
+    margin-top: 200px;
+    margin-left: 1%;
+  }
+
+  .right-button{
+    /* position: absolute; */
+    float: right;
+    margin-top: 200px;
+    margin-right: 1%;
+    /* margin-left: 95%; */
+    /* margin-right: 20px; */
   }
 
   .middle {
-    float: left;
-    width: 90%;
-    overflow: auto;
+    min-height: 400px;
+    /* overflow: auto; */
     /*will change this to hidden later to deny scolling to user*/
     white-space: nowrap;
+    overflow-x: hidden;
+  }
+
+  .card_style{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.example-card {
+    max-width: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .media-scroller{
+    --spacer: 10px;
+    display: grid;
+    gap: var(--spacer);
+    grid-auto-flow: column;
+    /* grid-auto-columns: 25%; */
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    /* overflow-x: hidden; */
+  }
+
+  .media-scroller::-webkit-scrollbar{
+    display: none;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .snap-inline{
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: var(--spacer, 10px);
+  }
+
+  .snap-inline > *{
+    scroll-snap-align: start;
   }
