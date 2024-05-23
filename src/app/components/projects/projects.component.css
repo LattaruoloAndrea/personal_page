@@ -1,35 +1,42 @@
 .container{
-  height: 100%;
-  min-height: 400px;
-  width: 100%;
+  /* height: 100vh;
+  width: 100vw; */
   position:relative;
   background-color: rgb(52, 185, 185);
   padding-top: 64px;
 }
 
 .info-widget {
-    width: 90vh;
-    margin: 10px;
-    border: 4px solid black;
-    display: inline-block;
-    background-color: blue;
+    width: 77vw;
   }
 
   .left-button{
-    float: left;
+    /* float: left; */
+    position:absolute;
     /* position: absolute; */
-    margin-top: 200px;
-    margin-left: 1%;
+    margin-top: 28vh;
+    margin-left: 1vw;
   }
 
   .right-button{
-    /* position: absolute; */
-    float: right;
-    margin-top: 200px;
-    margin-right: 1%;
+    position: absolute;
+    margin-top: 28vh;
+    margin-left: 95vw;
     /* margin-left: 95%; */
     /* margin-right: 20px; */
   }
+
+  @media screen and (max-width:480px) {
+    .right-button{
+      position: absolute;
+      margin-top: 28vh;
+      margin-left: 88vw;
+      /* margin-left: 95%; */
+      /* margin-right: 20px; */
+    }
+  
+}
+
 
   .middle {
     min-height: 400px;
@@ -45,18 +52,35 @@
 }
 
 .example-card {
-    max-width: 100%;
-    margin-left: 15%;
-    margin-right: 15%;
+  min-height: 50vh;
+    /* width: 80vw; */
+    /* width: 90%;
+    height: 80%; */
+    
   }
-  
+  .spacer{
+    width: 100px;
+    height: 6vh;
+  }
   .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover; */
+  }
+
+  .full-dimension{
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .nine-dimension{
+    height: 90vh;
+    width: 89vw;
+    margin-left: 4vw;
+
   }
 
   .media-scroller{
-    --spacer: 10px;
+    --spacer: 12px;
     display: grid;
     gap: var(--spacer);
     grid-auto-flow: column;
@@ -68,13 +92,13 @@
 
   .media-scroller::-webkit-scrollbar{
     display: none;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;   
+    scrollbar-width: none;   
   }
 
   .snap-inline{
     scroll-snap-type: inline mandatory;
-    scroll-padding-inline: var(--spacer, 10px);
+    scroll-padding-inline: var(--spacer, 12px);
   }
 
   .snap-inline > *{
