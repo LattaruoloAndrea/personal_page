@@ -23,4 +23,26 @@ export class ProjectsComponent {
     // this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft - 150), behavior: 'smooth' });
   }
 
+  images = [
+    'https://via.placeholder.com/800x400?text=Slide+1',
+    'https://via.placeholder.com/800x400?text=Slide+2',
+    'https://via.placeholder.com/800x400?text=Slide+3',
+    'https://via.placeholder.com/800x400?text=Slide+4',
+  ];
+
+  currentSlide = 0;
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.images.length;
+  }
+
+  prevSlide() {
+    this.currentSlide =
+      (this.currentSlide - 1 + this.images.length) % this.images.length;
+  }
+
+  setSlide(index: number) {
+    this.currentSlide = index;
+  }
+
 }

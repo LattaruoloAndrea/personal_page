@@ -1,106 +1,69 @@
-.container{
-  /* height: 100vh;
-  width: 100vw; */
-  position:relative;
-  background-color: rgb(52, 185, 185);
-  padding-top: 64px;
+.carousel-container {
+  position: relative;
+  max-width: 90%;
+  margin-top: 100px;
+  margin-left: 5%;
+  margin: auto;
+  overflow: hidden;
 }
 
-.info-widget {
-    width: 77vw;
-  }
-
-  .left-button{
-    /* float: left; */
-    position:absolute;
-    /* position: absolute; */
-    margin-top: 28vh;
-    margin-left: 1vw;
-  }
-
-  .right-button{
-    position: absolute;
-    margin-top: 28vh;
-    margin-left: 95vw;
-    /* margin-left: 95%; */
-    /* margin-right: 20px; */
-  }
-
-  @media screen and (max-width:480px) {
-    .right-button{
-      position: absolute;
-      margin-top: 28vh;
-      margin-left: 88vw;
-      /* margin-left: 95%; */
-      /* margin-right: 20px; */
-    }
-  
+.carousel-slides {
+  display: flex;
+  /* transition: transform 0.5s ease-in-out; */
+  height: 400px;
 }
 
-
-  .middle {
-    min-height: 400px;
-    /* overflow: auto; */
-    /*will change this to hidden later to deny scolling to user*/
-    white-space: nowrap;
-    overflow-x: hidden;
-  }
-
-  .card_style{
-    margin-left: 5%;
-    margin-right: 5%;
+.carousel-slide {
+  min-width: 100%;
+  transition: opacity 1s;
+  opacity: 0;
 }
 
-.example-card {
-  min-height: 50vh;
-    /* width: 80vw; */
-    /* width: 90%;
-    height: 80%; */
-    
-  }
-  .spacer{
-    width: 100px;
-    height: 6vh;
-  }
-  .example-header-image {
-    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover; */
-  }
+.carousel-slide.active {
+  opacity: 1;
+}
 
-  .full-dimension{
-    height: 100vh;
-    width: 100vw;
-  }
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  .nine-dimension{
-    height: 90vh;
-    width: 89vw;
-    margin-left: 4vw;
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+}
 
-  }
+.carousel-control.prev {
+  left: 0;
+}
 
-  .media-scroller{
-    --spacer: 12px;
-    display: grid;
-    gap: var(--spacer);
-    grid-auto-flow: column;
-    /* grid-auto-columns: 25%; */
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    /* overflow-x: hidden; */
-  }
+.carousel-control.next {
+  right: 0;
+}
 
-  .media-scroller::-webkit-scrollbar{
-    display: none;
-    -ms-overflow-style: none;   
-    scrollbar-width: none;   
-  }
+.carousel-dots {
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
 
-  .snap-inline{
-    scroll-snap-type: inline mandatory;
-    scroll-padding-inline: var(--spacer, 12px);
-  }
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: lightgray;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
 
-  .snap-inline > *{
-    scroll-snap-align: start;
-  }
+.dot.active {
+  background-color: black;
+}
