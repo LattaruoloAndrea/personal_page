@@ -15,7 +15,7 @@ export class ProjectsComponent {
   // @ViewChild('widgetsContent', { read: ElementRef }) 
   // private widgetsContent: ElementRef<any>;
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
-  @ViewChild('carouselTrack') carouselTrack!: ElementRef;
+  @ViewChild('carouselCard') carouselCard!: ElementRef;
   slides = [
     {
       image: 'https://via.placeholder.com/800x400?text=Slide+1',
@@ -52,6 +52,7 @@ export class ProjectsComponent {
   isMobile = false;
   cardWidth = 0;
   containerWidth = 0;
+  indexForDotsMobile = 0;
 
   constructor(private renderer: Renderer2) {}
 
@@ -74,19 +75,29 @@ export class ProjectsComponent {
 
   setupScrollListener() {
     if (this.isMobile) {
+      this.setCardWidthSize();
       this.carouselContainer.nativeElement.addEventListener('scroll', () => {
         const scrollPosition = this.carouselContainer.nativeElement.scrollLeft;
-        this.currentIndex = Math.round(scrollPosition / this.cardWidth);
+        this.indexForDotsMobile = Math.floor(scrollPosition / this.cardWidth);
+        if(this.indexForDotsMobile>=this.slides.length){
+          this.indexForDotsMobile = this.slides.length-1;
+        }
       });
     }
   }
 
+  setCardWidthSize(){
+    this.cardWidth = this.carouselCard.nativeElement.offsetWidth;
+  }
+
   onPreviousClick() {
     this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.slides.length - 1;
+    this.indexForDotsMobile = this.currentIndex;
   }
 
   onNextClick() {
     this.currentIndex = this.currentIndex < this.slides.length - 1 ? this.currentIndex + 1 : 0;
+    this.indexForDotsMobile=this.currentIndex;
   }
 
 }
