@@ -28,3 +28,7 @@
     height: 100vh;
     /* margin-top: 64px; */
 }
+
+.red{
+    background-color: rebeccapurple;
+}
