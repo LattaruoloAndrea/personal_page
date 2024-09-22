@@ -1,3 +1,28 @@
-.container{
-    padding-top: 64px;
-}
+.email-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  mat-card {
+    padding: 20px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+  button {
+    align-self: flex-end;
+  }
+  @media (max-width: 600px) {
+    .email-form-container {
+      margin: 10px auto;
+      padding: 0 10px;
+    }
+    mat-card {
+      padding: 16px;
+    }
+  }

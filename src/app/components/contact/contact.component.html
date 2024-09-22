@@ -1,2 +1,40 @@
-<div class="container"></div>
-<p>contact works!</p>
+<div style="width: 10px;height: 20vh;"></div>
+<div class="email-form-container">
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>Send Email</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+              <mat-label>From</mat-label>
+              <input matInput formControlName="to" placeholder="yourEmail@example.com" required>
+              @if(emailForm.get('to')?.hasError('required')){
+                  <mat-error>Email address is required</mat-error>
+              }
+              @if(emailForm.get('to')?.hasError('email')){
+                  <mat-error>Please enter a valid email address</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Subject</mat-label>
+              <input matInput formControlName="subject" placeholder="Email subject" required>
+              @if(emailForm.get('message')?.hasError('required')){
+                <mat-error>Message is required</mat-error>
+            }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Message</mat-label>
+              <textarea matInput formControlName="message" placeholder="Your message" rows="4" required></textarea>
+              @if(emailForm.get('subject')?.hasError('required')){
+                <mat-error>Subject is required</mat-error>
+            }
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="emailForm.invalid">Send Email</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+  </div>
