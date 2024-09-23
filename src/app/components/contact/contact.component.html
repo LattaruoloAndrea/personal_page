@@ -6,7 +6,7 @@
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline">
+            <!-- <mat-form-field appearance="outline">
               <mat-label>From</mat-label>
               <input matInput formControlName="to" placeholder="yourEmail@example.com" required>
               @if(emailForm.get('to')?.hasError('required')){
@@ -15,7 +15,7 @@
               @if(emailForm.get('to')?.hasError('email')){
                   <mat-error>Please enter a valid email address</mat-error>
               }
-            </mat-form-field>
+            </mat-form-field> -->
 
             <mat-form-field appearance="outline">
               <mat-label>Subject</mat-label>
@@ -32,7 +32,6 @@
                 <mat-error>Message is required</mat-error>
             }
             </mat-form-field>
-
             <button mat-raised-button color="primary" type="submit" [disabled]="emailForm.invalid">Send Email</button>
           </form>
         </mat-card-content>

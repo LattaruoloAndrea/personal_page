@@ -17,7 +17,7 @@ export class ContactComponent {
 
   constructor(private fb: FormBuilder) {
     this.emailForm = this.fb.group({
-      to: ['', [Validators.required, Validators.email]],
+      // to: ['', [Validators.required, Validators.email]],
       subject: ['', Validators.required],
       message: ['', Validators.required]
     });
@@ -25,7 +25,13 @@ export class ContactComponent {
 
   onSubmit() {
     if (this.emailForm.valid) {
-      console.log('Form submitted', this.emailForm.value);
+      // console.log('Form submitted', this.emailForm.value);
+      const mail = "mailto:test@domain.com";
+      const emailSub=  this.emailForm.get('subject')?.value;
+      const emailBody = this.emailForm.get('message')?.value
+      // var p = 'mailto:' + mail+'?subject='+  +'&body='+ this.emailForm.get('message')?.value;
+      // window.location.href = mail;
+      location.href = "mailto:"+mail+'&subject='+emailSub+'&body='+emailBody;
       // Here you would typically call a service to send the email
       // For example: this.emailService.sendEmail(this.emailForm.value);
     }
