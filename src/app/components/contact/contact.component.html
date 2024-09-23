@@ -20,16 +20,16 @@
             <mat-form-field appearance="outline">
               <mat-label>Subject</mat-label>
               <input matInput formControlName="subject" placeholder="Email subject" required>
-              @if(emailForm.get('message')?.hasError('required')){
-                <mat-error>Message is required</mat-error>
+              @if(emailForm.get('subject')?.hasError('required')){
+                <mat-error>Subject is required</mat-error>
             }
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>Message</mat-label>
               <textarea matInput formControlName="message" placeholder="Your message" rows="4" required></textarea>
-              @if(emailForm.get('subject')?.hasError('required')){
-                <mat-error>Subject is required</mat-error>
+              @if(emailForm.get('message')?.hasError('required')){
+                <mat-error>Message is required</mat-error>
             }
             </mat-form-field>
 

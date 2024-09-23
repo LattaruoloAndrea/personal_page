@@ -4,13 +4,11 @@ import { MatCardModule } from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatButtonModule,],
+  imports: [MatFormFieldModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatButtonModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })

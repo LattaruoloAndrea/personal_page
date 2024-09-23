@@ -7,7 +7,7 @@ import { ContactComponent } from '../components/contact/contact.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CubeComponent,NavbarComponent,AboutComponent,ProjectsComponent,ContactComponent],
+  imports: [CubeComponent,NavbarComponent,AboutComponent,ProjectsComponent,ContactComponent,],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
