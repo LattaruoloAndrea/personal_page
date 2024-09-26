@@ -24,6 +24,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: LattaruoloAndrea/personal_page@v4
         with:
-          folder: docs/browser
+          folder: docs/browser/.
           branch: prod  
           token: ${{ secrets.PAGE_TOKEN }}
