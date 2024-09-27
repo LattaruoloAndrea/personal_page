@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,13 +17,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build Angular app to prod
-        working-directory: .
-        run: npm install && npm run build:prod
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build:prod
 
       - name: Deploy to GitHub Pages
-        uses: LattaruoloAndrea/personal_page@v4
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          folder: docs/.
-          branch: prod  
+          branch: prod
+          folder: docs
           token: ${{ secrets.PAGE_TOKEN }}
