@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild  } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, NgZone } from '@angular/core';
+import * as THREE from 'three';
 import { fromEvent } from 'rxjs';
-import * as THREE from "three";
 
 @Component({
   selector: 'app-cube',
@@ -9,151 +9,115 @@ import * as THREE from "three";
   templateUrl: './cube.component.html',
   styleUrl: './cube.component.css'
 })
-export class CubeComponent implements OnInit, AfterViewInit {
-
-  @ViewChild('canvas')
-  private canvasRef: ElementRef | undefined;
-  //* Cube Properties
-
-  @Input() public rotationSpeedX: number = 0.05;
-
-  @Input() public rotationSpeedY: number = 0.01;
-
-  @Input() public size: number = 200;
-
-  // @Input() public texture: string = "/assets/texture.jpg";
-
-
-  //* Stage Properties
-
-  @Input() public cameraZ: number = 400;
-
-  @Input() public fieldOfView: number = 45;
-
-  @Input('nearClipping') public nearClippingPlane: number = 1;
-
-  @Input('farClipping') public farClippingPlane: number = 1000;
-
-  //? Helper Properties (Private Properties);
-
-  private camera!: THREE.PerspectiveCamera;
-
-  private get canvas(): HTMLCanvasElement {
-    return this.canvasRef?.nativeElement;
-  }
-  // private loader = new THREE.TextureLoader();
-  private geometry = new THREE.BoxGeometry(1, 1, 1);
-  private  light = new THREE.AmbientLight( 0xff0000, 1, );
-  private  pointLight = new THREE.PointLight( 0xffffff, 4, 100);
-
-  // private material = new THREE.MeshBasicMaterial({ map: this.loader.load(this.texture) });
-  private material = new THREE.MeshLambertMaterial({
-    color: "#ffffff"
-    // color: "#e03024",
-    // wireframe: true,
-    // wireframeLinewidth: 20,
-  });
-
-  private cube: THREE.Mesh = new THREE.Mesh(this.geometry,this.material);
-
+export class CubeComponent implements OnInit, OnDestroy {
   private renderer!: THREE.WebGLRenderer;
-
   private scene!: THREE.Scene;
+  private camera!: THREE.PerspectiveCamera;
+  private accretionDisk!: THREE.Mesh;
+  private animationFrameId: number | null = null;
 
-  getWidth() {
-    return this.canvas.width;
-  }
-  
-  getHeight() {
-    return this.canvas.height;
-  }
+  constructor(private ngZone: NgZone, private el: ElementRef) {}
 
-  /**
-   *Animate the cube
-   *
-   * @private
-   * @memberof CubeComponent
-   */
-  private animateCube() {
-    this.cube.rotation.x += this.rotationSpeedX;
-    this.cube.rotation.y += this.rotationSpeedY;
-  }
-
-  /**
-   * Create the scene
-   *
-   * @private
-   * @memberof CubeComponent
-   */
-  private createScene() {
-    //* Scene
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
-    this.cube.translateY(2);
-    this.scene.add(this.cube);
-    var bulb = new THREE.SphereGeometry(0.1, 32, 32);
-    var bulb_material = new THREE.MeshBasicMaterial({
-      color: "#e03024",
-    });
-    var  bulb_mesh = new THREE.Mesh(bulb,bulb_material);
-    // bulb.translate(0,2,0);
-    // this.scene.add(bulb_mesh);
-    this.pointLight.position.set( 0, 4, 0 );
-    this.scene.add(this.light);
-    this.scene.add(this.pointLight);
-    //*Camera
-    let aspectRatio = this.getAspectRatio();
-    this.camera = new THREE.PerspectiveCamera(
-      1,
-      aspectRatio,
-      this.nearClippingPlane,
-      this.farClippingPlane
-    )
-    this.camera.position.z = this.cameraZ;
-  }
-
-  private getAspectRatio() {
-    return this.canvas.clientWidth / this.canvas.clientHeight;
-  }
-
-  /**
- * Start the rendering loop
- *
- * @private
- * @memberof CubeComponent
- */
-  private startRenderingLoop() {
-    //* Renderer
-    // Use canvas element in template
-    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas });
-    this.renderer.setPixelRatio(devicePixelRatio);
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-
-    let component: CubeComponent = this;
-    function render() {
-      requestAnimationFrame(render);
-      window.addEventListener('resize',()=>{
-        component.canvas.width = window.innerWidth;
-        component.canvas.height = window.innerHeight;
-        // console.log(component.canvas.width,component.canvas.height);
-        component.camera.aspect = component.getWidth()/component.getHeight();
-        component.renderer.setSize(component.getWidth(),component.getHeight());
-        component.camera.updateProjectionMatrix();
-      },false);
-      component.animateCube();
-      component.renderer.render(component.scene, component.camera);
-    };
-    render();
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
+  ngOnInit() {
+    this.initThreeJS();
     this.createScene();
-    this.startRenderingLoop();
+    this.animate();
+    this.handleResize();
   }
 
+  ngOnDestroy() {
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  private initThreeJS() {
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.renderer = new THREE.WebGLRenderer({ canvas: this.el.nativeElement.querySelector('canvas'), antialias: true });
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setClearColor(0x000000);
+  }
+
+  private createScene() {
+    // Blue glacial black hole (center sphere)
+    const blackHoleGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const blackHoleMaterial = new THREE.MeshBasicMaterial({ color: 0x007bff }); // Blue glacial color
+    const blackHole = new THREE.Mesh(blackHoleGeometry, blackHoleMaterial);
+    this.scene.add(blackHole);
+
+    // Accretion disk
+    const diskGeometry = new THREE.RingGeometry(0.1, 3, 64);
+    const diskMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        
+        void main() {
+          float distance = length(vUv - vec2(0.5, 0.5)) * 2.0;
+          float angle = atan(vUv.y - 0.5, vUv.x - 0.5);
+          float intensity = sin(distance * 10.0 + time * 2.0 - angle * 4.0) * 0.5 + 0.5;
+          vec3 purpleColor = mix(vec3(0.8, 0.2, 1.0), vec3(0.4, 0.0, 0.8), distance);
+          vec3 blueColor = vec3(0.0, 0.478, 1.0); // Blue glacial color
+          vec3 color = mix(purpleColor, purpleColor, smoothstep(0.0, 0.2, distance));
+          gl_FragColor = vec4(color * intensity, 1.0 - distance * 0.2);
+        }
+      `,
+      side: THREE.DoubleSide,
+      transparent: true,
+    });
+    this.accretionDisk = new THREE.Mesh(diskGeometry, diskMaterial);
+    this.accretionDisk.rotation.x = Math.PI / 4;
+    this.scene.add(this.accretionDisk);
+
+    // Stars
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsCount = 1000;
+    const starsPositions = new Float32Array(starsCount * 3);
+
+    for (let i = 0; i < starsCount * 3; i += 3) {
+      starsPositions[i] = (Math.random() - 0.5) * 100;
+      starsPositions[i + 1] = (Math.random() - 0.5) * 100;
+      starsPositions[i + 2] = (Math.random() - 0.5) * 100;
+    }
+
+    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+    const starsMaterial = new THREE.PointsMaterial({ color: 0xFFFFFF, size: 0.1 });
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    this.scene.add(stars);
+
+    this.camera.position.z = 8;
+  }
+
+  private animate() {
+    this.ngZone.runOutsideAngular(() => {
+      const animateFn = () => {
+        this.animationFrameId = requestAnimationFrame(animateFn);
+
+        // Update the shader time uniform (reversed direction)
+        // Update the shader time uniform (reversed direction)
+        (this.accretionDisk.material as THREE.ShaderMaterial).uniforms['time'].value -= 0.01;
+
+        this.renderer.render(this.scene, this.camera);
+      };
+      animateFn();
+    });
+  }
+
+  private handleResize = () => {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 }
