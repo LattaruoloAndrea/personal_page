@@ -21,7 +21,6 @@ jobs:
         working-directory: .
         run: npm install && npm run build:prod
 
-
       - name: Deploy to GitHub Pages
         uses: LattaruoloAndrea/personal_page@v4
         with:
