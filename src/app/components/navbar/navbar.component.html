@@ -1,15 +1,15 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row class="navbar">
-      <canvas href="#home" style="background-color: aqua; width: 48px;height: 48px;">
+      <canvas (click)="scrollToElement('home')" style="background-color: aqua; width: 48px;height: 48px;">
       </canvas>
       <!-- <button mat-icon-button color="accent">
         <mat-icon>menu</mat-icon>
       </button> -->
       <span></span>
       <div class="navbar">
-        <a href="#about" class="sectionsStyle sectionsDimension">{{"About"}}</a>
-        <a href="#projects" class="sectionsStyle sectionsDimension">{{"Projects"}}</a>
-        <a href="#contacts" class="sectionsStyle sectionsDimension">{{"Contancts"}}</a>
+        <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('about')">{{"About"}}</a>
+        <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('projects')">{{"Projects"}}</a>
+        <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('contacts')">{{"Contancts"}}</a>
         <div class="theme-control">
           <!-- <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle> -->
           <button mat-icon-button (click)="toggleTheme()">

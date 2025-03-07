@@ -1,6 +1,5 @@
-import { Component, ElementRef, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, NgZone, HostListener } from '@angular/core';
 import * as THREE from 'three';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-cube',
@@ -13,8 +12,11 @@ export class CubeComponent implements OnInit, OnDestroy {
   private renderer!: THREE.WebGLRenderer;
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
-  private accretionDisk!: THREE.Mesh;
+  private spheresGroup!: THREE.Group;
   private animationFrameId: number | null = null;
+  private rotationSpeed = 0.01;
+  private fixedRotationSpeed = 0.01;
+  private previousScrollY = 0;
 
   constructor(private ngZone: NgZone, private el: ElementRef) {}
 
@@ -34,70 +36,26 @@ export class CubeComponent implements OnInit, OnDestroy {
 
   private initThreeJS() {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.renderer = new THREE.WebGLRenderer({ canvas: this.el.nativeElement.querySelector('canvas'), antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setClearColor(0x000000);
   }
 
   private createScene() {
-    // Blue glacial black hole (center sphere)
-    const blackHoleGeometry = new THREE.SphereGeometry(1, 32, 32);
-    const blackHoleMaterial = new THREE.MeshBasicMaterial({ color: 0x007bff }); // Blue glacial color
-    const blackHole = new THREE.Mesh(blackHoleGeometry, blackHoleMaterial);
-    this.scene.add(blackHole);
+    this.spheresGroup = new THREE.Group();
 
-    // Accretion disk
-    const diskGeometry = new THREE.RingGeometry(0.1, 3, 64);
-    const diskMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 }
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float time;
-        varying vec2 vUv;
-        
-        void main() {
-          float distance = length(vUv - vec2(0.5, 0.5)) * 2.0;
-          float angle = atan(vUv.y - 0.5, vUv.x - 0.5);
-          float intensity = sin(distance * 10.0 + time * 2.0 - angle * 4.0) * 0.5 + 0.5;
-          vec3 purpleColor = mix(vec3(0.8, 0.2, 1.0), vec3(0.4, 0.0, 0.8), distance);
-          vec3 blueColor = vec3(0.0, 0.478, 1.0); // Blue glacial color
-          vec3 color = mix(purpleColor, purpleColor, smoothstep(0.0, 0.2, distance));
-          gl_FragColor = vec4(color * intensity, 1.0 - distance * 0.2);
-        }
-      `,
-      side: THREE.DoubleSide,
-      transparent: true,
-    });
-    this.accretionDisk = new THREE.Mesh(diskGeometry, diskMaterial);
-    this.accretionDisk.rotation.x = Math.PI / 4;
-    this.scene.add(this.accretionDisk);
-
-    // Stars
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsCount = 1000;
-    const starsPositions = new Float32Array(starsCount * 3);
-
-    for (let i = 0; i < starsCount * 3; i += 3) {
-      starsPositions[i] = (Math.random() - 0.5) * 100;
-      starsPositions[i + 1] = (Math.random() - 0.5) * 100;
-      starsPositions[i + 2] = (Math.random() - 0.5) * 100;
+    const sphereGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+    const spheresCount = 300;
+    for (let i = 0; i < spheresCount; i++) {
+      const sphereMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color(Math.random(), Math.random(), Math.random()) });
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+      sphere.position.set((Math.random() - 0.5) * 50, (Math.random() - 0.5) * 50, (Math.random() - 0.5) * 50);
+      this.spheresGroup.add(sphere);
     }
 
-    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
-    const starsMaterial = new THREE.PointsMaterial({ color: 0xFFFFFF, size: 0.1 });
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    this.scene.add(stars);
-
-    this.camera.position.z = 8;
+    this.scene.add(this.spheresGroup);
+    this.camera.position.z = 100;
   }
 
   private animate() {
@@ -105,9 +63,8 @@ export class CubeComponent implements OnInit, OnDestroy {
       const animateFn = () => {
         this.animationFrameId = requestAnimationFrame(animateFn);
 
-        // Update the shader time uniform (reversed direction)
-        // Update the shader time uniform (reversed direction)
-        (this.accretionDisk.material as THREE.ShaderMaterial).uniforms['time'].value -= 0.01;
+        // Rotate the group of spheres
+        this.spheresGroup.rotation.y += this.rotationSpeed;
 
         this.renderer.render(this.scene, this.camera);
       };
@@ -120,4 +77,16 @@ export class CubeComponent implements OnInit, OnDestroy {
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event: Event) {
+    const scrollY = window.scrollY;
+    if(Math.abs(scrollY-this.previousScrollY)>=1) {
+      this.rotationSpeed = this.fixedRotationSpeed;
+    }else{
+      this.rotationSpeed = this.fixedRotationSpeed + 2;
+    }
+    this.previousScrollY = scrollY;
+  }
+  
 }
