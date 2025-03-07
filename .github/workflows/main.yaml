@@ -20,11 +20,11 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm ci
-          npm run build:prod
+          npm run build:prod --output-path=dist
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          folder: personal_page/docs/browser
+          folder: dist
           branch: prod  
           token: ${{ secrets.PAGE_TOKEN }}
