@@ -1,30 +1,131 @@
-<div class="carousel-container" #carouselContainer>
-  <div class="carousel-track" [style.transform]="'translateX(' + -currentIndex * 100 + '%)'">
-    @for(slide of slides; track $index){
-    <div class="carousel-card"#carouselCard>
-        <img [src]="slide.image" [alt]="slide.alt">
-        <div class="card-content">
-          <h3>{{ slide.title }}</h3>
-          <p>{{ slide.description }}</p>
-          <div class="carousel-dots">
-            @for(slide of slides;track idx; let idx = $index){
-            <span
-              class="dot"
-              [class.active]="idx === indexForDotsMobile"
-            ></span>
+<section class="projects-section" [@fadeInUp]="'visible'">
+      <div class="container">
+        <!-- Header -->
+        <div class="header" [@slideInLeft]="'visible'">
+          <h2 class="section-title">My Projects</h2>
+          <div class="title-underline"></div>
+          <p class="section-subtitle">
+            A showcase of my recent work and creative solutions
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-container" [@slideInUp]="'visible'">
+          <button 
+            class="filter-btn" 
+            [class.active]="selectedFilter === 'all'"
+            (click)="filterProjects('all')">
+            All Projects
+          </button>
+          @for (category of categories; track category) {
+            <button 
+              class="filter-btn" 
+              [class.active]="selectedFilter === category"
+              (click)="filterProjects(category)">
+              {{ category }}
+            </button>
           }
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" [@staggerIn]="'visible'">
+          @for (project of filteredProjects; track project.id) {
+            <div class="project-card" 
+                 [@projectCard]="'visible'"
+                 [style.animation-delay]="$index * 0.1 + 's'">
+              
+              <!-- Project Image -->
+              <div class="project-image-container">
+                <img [src]="project.image" [alt]="project.title" class="project-image">
+                <div class="project-overlay">
+                  <div class="overlay-content">
+                    <button class="overlay-btn" (click)="openProject(project)">
+                      <i class="fas fa-eye"></i>
+                      View Project
+                    </button>
+                    <button class="overlay-btn" (click)="openGithub(project)">
+                      <i class="fab fa-github"></i>
+                      Source Code
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Project Content -->
+              <div class="project-content">
+                <div class="project-header">
+                  <h3 class="project-title">{{ project.title }}</h3>
+                  <div class="project-category">{{ project.category }}</div>
+                </div>
+                
+                <p class="project-description">{{ project.description }}</p>
+                
+                <!-- Technologies Used -->
+                <div class="project-tech">
+                  @for (tech of project.technologies; track tech) {
+                    <span class="tech-tag">{{ tech }}</span>
+                  }
+                </div>
+
+                <!-- Project Stats -->
+                <div class="project-stats">
+                  <div class="stat">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>{{ project.year }}</span>
+                  </div>
+                  <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    <span>{{ project.duration }}</span>
+                  </div>
+                  @if (project.team) {
+                    <div class="stat">
+                      <i class="fas fa-users"></i>
+                      <span>{{ project.team }}</span>
+                    </div>
+                  }
+                </div>
+
+                <!-- Project Links -->
+                <div class="project-links">
+                  <a [href]="project.liveUrl" target="_blank" class="project-link live-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    Live Demo
+                  </a>
+                  <a [href]="project.githubUrl" target="_blank" class="project-link github-link">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Load More Button -->
+        @if (hasMoreProjects) {
+          <div class="load-more-container" [@fadeIn]="'visible'">
+            <button class="load-more-btn" (click)="loadMoreProjects()">
+              <span>Load More Projects</span>
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+        }
+
+        <!-- Achievement Section -->
+        <div class="achievement-section" [@fadeInUp]="'visible'">
+          <div class="achievement-grid">
+            @for (achievement of achievements; track achievement.label) {
+              <div class="achievement-item" [@countUp]="'visible'">
+                <div class="achievement-icon">
+                  <i [class]="achievement.icon"></i>
+                </div>
+                <div class="achievement-content">
+                  <div class="achievement-number">{{ achievement.number }}</div>
+                  <div class="achievement-label">{{ achievement.label }}</div>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
-    @if(isMobile){
-      <span style="width: 30px;height: 10px; color:rebeccapurple" >k</span>
-    }
-    }
-
-  </div>
-  
-  @if(! isMobile){
-    <a class="carousel-control prev" (click)="onPreviousClick()" >&#10094;</a>
-    <a class="carousel-control next" (click)="onNextClick()" >&#10095;</a>
-  }
-</div>
+    </section>

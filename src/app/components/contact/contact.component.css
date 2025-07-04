@@ -1,28 +1,136 @@
-.email-form-container {
+  .contact-section {
+    min-height: 60vh;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #d3d3d38f 0%, hsla(0, 0%, 21%, 0.315) 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section .container {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 2;
   }
-  mat-card {
-    padding: 20px;
+
+  .contact-section .header {
+    text-align: center;
+    margin-bottom: 50px;
   }
-  form {
+
+  .contact-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #fff, #a8edea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contact-section .title-underline {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 0 auto 20px;
+    border-radius: 2px;
+  }
+
+  .contact-section .section-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 40px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
-  mat-form-field {
-    width: 100%;
+
+  .form-group input,
+  .form-group textarea {
+    width: 90%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
   }
-  button {
-    align-self: flex-end;
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border: 1.5px solid #667eea;
   }
-  @media (max-width: 600px) {
-    .email-form-container {
-      margin: 10px auto;
-      padding: 0 10px;
-    }
-    mat-card {
-      padding: 16px;
-    }
+
+  .send-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .send-btn:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+  }
+
+  .download-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    backdrop-filter: blur(10px);
+  }
+
+  .download-cv-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .linkedin-btn {
+    background: #0077b5;
+    border: 1px solid #0077b5;
+    color: #fff;
+  }
+
+  .linkedin-btn:hover {
+    background: #005983;
+    border-color: #005983;
+  }
+
+  .contact-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
   }

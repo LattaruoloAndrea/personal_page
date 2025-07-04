@@ -1,39 +1,76 @@
-<div class="moonboard">
-    <!-- <mat-card class="card_style">
-        <mat-card-title color="accent">
-            {{"About"}}
-        </mat-card-title>
-        <mat-card-content>
-            <p>
-                {{"CiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiaoCiao"}}
-            </p>
-        </mat-card-content>
-    </mat-card> -->
-    <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Lattaruolo Andrea</mat-card-title>
-          <mat-card-subtitle>Portfolio</mat-card-subtitle>
-        </mat-card-header>
-        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-        <mat-card-content>
-          <p>
-            Hello my name is Andrea, I graduated in december of 2020 from the master computer science degree from the University of Udine.
-            I have been working in the company Fondazione Bruno Kessler since march 2024.  
-          </p>
-          <p>
-            Hello my name is Andrea, I graduated in december of 2020 from the master computer science degree from the University of Udine.
-            I have been working in the company Fondazione Bruno Kessler since march 2024.  
-          </p>
-          <p>
-            Hello my name is Andrea, I graduated in december of 2020 from the master computer science degree from the University of Udine.
-            I have been working in the company Fondazione Bruno Kessler since march 2024.  
-          </p>
-        </mat-card-content>
-        <!-- <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions> -->
-      </mat-card>
+    <section class="about-section" [@fadeInUp]="'visible'">
+      <div class="container">
+        <!-- Header -->
+        <div class="header" [@slideInLeft]="'visible'">
+          <h2 class="section-title">About Me</h2>
+          <div class="title-underline"></div>
+        </div>
 
-</div>
+        <!-- Main Content -->
+        <div class="content-grid">
+          <!-- Profile Image -->
+          <div class="profile-container" [@scaleIn]="'visible'">
+            <div class="profile-image-wrapper">
+              <img 
+                src="../assets/images/duck.jpg" 
+                alt="Profile Picture" 
+                class="profile-image"
+              />
+              <div class="profile-overlay">
+                <div class="profile-ring"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- About Text -->
+          <div class="about-content" [@slideInRight]="'visible'">
+            <div class="intro-text">
+              <h3 class="greeting">Hello! I'm a passionate developer</h3>
+              <p class="description">
+                I specialize in creating digital experiences that combine beautiful design 
+                with powerful functionality. With expertise in modern web technologies, 
+                I transform ideas into engaging, user-friendly applications.
+              </p>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="skills-container" [@staggerIn]="'visible'">
+              <h4 class="skills-title">What I Do</h4>
+              <div class="skills-grid">
+                @for (skill of skills; track skill.name; let i = $index) {
+                  <div class="skill-card" 
+                       [@skillCard]="'visible'" 
+                       [style.animation-delay]="i * 0.1 + 's'">
+                    <div class="skill-icon">
+                      <i [class]="skill.icon"></i>
+                    </div>
+                    <h5>{{ skill.name }}</h5>
+                    <p>{{ skill.description }}</p>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="cta-container" [@fadeIn]="'visible'">
+              <button class="cta-button" (click)="scrollToContact()">
+                <span>Let's Work Together</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section" [@fadeInUp]="'visible'">
+          <div class="stats-grid">
+            @for (stat of stats; track stat.label) {
+              <div class="stat-item" [@countUp]="'visible'">
+                <div class="stat-number">{{ stat.number }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </section>

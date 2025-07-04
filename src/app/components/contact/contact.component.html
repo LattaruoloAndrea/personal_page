@@ -1,39 +1,30 @@
-<div style="width: 10px;height: 20vh;"></div>
-<div class="email-form-container">
-    <mat-card>
-        <mat-card-header>
-          <mat-card-title>Send Email</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
-            <!-- <mat-form-field appearance="outline">
-              <mat-label>From</mat-label>
-              <input matInput formControlName="to" placeholder="yourEmail@example.com" required>
-              @if(emailForm.get('to')?.hasError('required')){
-                  <mat-error>Email address is required</mat-error>
-              }
-              @if(emailForm.get('to')?.hasError('email')){
-                  <mat-error>Please enter a valid email address</mat-error>
-              }
-            </mat-form-field> -->
-
-            <mat-form-field appearance="outline">
-              <mat-label>Subject</mat-label>
-              <input matInput formControlName="subject" placeholder="Email subject" required>
-              @if(emailForm.get('subject')?.hasError('required')){
-                <mat-error>Subject is required</mat-error>
-            }
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Message</mat-label>
-              <textarea matInput formControlName="message" placeholder="Your message" rows="4" required></textarea>
-              @if(emailForm.get('message')?.hasError('required')){
-                <mat-error>Message is required</mat-error>
-            }
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit" [disabled]="emailForm.invalid">Send Email</button>
-          </form>
-        </mat-card-content>
-      </mat-card>
+<div class="contact-section">
+  <div class="container">
+    <div class="header">
+      <h2 class="section-title">Contact Me</h2>
+      <div class="title-underline"></div>
+      <p class="section-subtitle">Feel free to reach out for collaborations or just a friendly hello!</p>
+    </div>
+    <form class="contact-form">
+      <div class="form-group">
+        <input type="text" placeholder="Your Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-group">
+        <textarea rows="5" placeholder="Your Message" required style="resize: none;"></textarea>
+      </div>
+      <button type="submit" class="send-btn">Send Message</button>
+      <div class="contact-buttons">
+        <a href="../assets/lattaruolo_andrea_cv.pdf" download class="download-cv-btn">
+          <i class="fa fa-download"></i> Download CV
+        </a>
+        <a href="https://www.linkedin.com/in/andrea-lattaruolo-64a8a7170/" target="_blank" rel="noopener"
+          class="linkedin-btn download-cv-btn">
+          <i class="fa fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </form>
   </div>
+</div>

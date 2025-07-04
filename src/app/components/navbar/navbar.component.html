@@ -1,71 +1,13 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row class="navbar">
-      <canvas (click)="scrollToElement('home')" style="background-color: aqua; width: 48px;height: 48px;">
-      </canvas>
-      <!-- <button mat-icon-button color="accent">
-        <mat-icon>menu</mat-icon>
-      </button> -->
-      <span></span>
-      <div class="navbar">
-        <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('about')">{{"About"}}</a>
-        <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('projects')">{{"Projects"}}</a>
-        <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('contacts')">{{"Contancts"}}</a>
-        <div class="theme-control">
-          <!-- <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle> -->
-          <button mat-icon-button (click)="toggleTheme()">
-            @if(themeService.themeSignal() == "dark-theme"){
-              <mat-icon color="accent">bedtime</mat-icon>
-            }@else{
-              <mat-icon color="accent">brightness_5</mat-icon>
-            }
-          </button>
-        </div>
+<mat-toolbar>
+  <mat-toolbar-row class="navbar">
+    <img (click)="scrollToElement('home')" src="../assets/images/logo.png" style="width: 48px;height: 48px;" />
+    <span></span>
+    <div>
+      <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('about')">{{"About"}}</a>
+      <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('projects')">{{"Projects"}}</a>
+      <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('contacts')">{{"Contancts"}}</a>
+      <div class="theme-control">
       </div>
-
-      <!-- <span>Responsive Navigation</span>
-      <span class="menu-spacer"></span>
-      <div fxShow="true" fxHide.lt-md>
-        <a href="#1" mat-button>Menu Item 1</a>
-        <a href="#2" mat-button>Menu Item 2</a>
-        <a href="#3" mat-button>Menu Item 3</a>
-        <a href="#4" mat-button>Menu Item 4</a>
-        <a href="#5" mat-button>Menu Item 5</a>
-        <a href="#6" mat-button>Menu Item 6</a>
-      </div>
-      <mat-slide-toggle>lide</mat-slide-toggle> -->
-    </mat-toolbar-row>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
-
-<!-- <mat-toolbar color="primary" style="background-color: beige;">
-      <mat-toolbar-row>
-        <button mat-icon-button>
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span>Responsive Navigation</span>
-        <span class="menu-spacer"></span>
-        <div fxShow="true" fxHide.lt-md>
-          <a href="#1" mat-button>Menu Item 1</a>
-          <a href="#2" mat-button>Menu Item 2</a>
-          <a href="#3" mat-button>Menu Item 3</a>
-          <a href="#4" mat-button>Menu Item 4</a>
-          <a href="#5" mat-button>Menu Item 5</a>
-          <a href="#6" mat-button>Menu Item 6</a>
-        </div>
-        <mat-slide-toggle>lide</mat-slide-toggle>
-      </mat-toolbar-row>
-    </mat-toolbar> -->
-
-<!-- <mat-sidenav-container fxFlexFill>
-      <mat-sidenav #sidenav>
-        <mat-nav-list>
-          <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-          <a href="#" mat-list-item>Menu Item 1</a>
-          <a href="#" mat-list-item>Menu Item 2</a>
-          <a href="#" mat-list-item>Menu Item 3</a>
-          <a href="#" mat-list-item>Menu Item 4</a>
-          <a href="#" mat-list-item>Menu Item 5</a>
-          <a href="#"mat-list-item>Menu Item 6</a>
-        </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>
-    </mat-sidenav-container> -->
