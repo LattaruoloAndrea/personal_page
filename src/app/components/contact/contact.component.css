@@ -134,3 +134,20 @@
     justify-content: center;
     margin-top: 10px;
   }
+
+  .error-message {
+    color: #831313;
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+
+    .send-btn:hover,
+    .download-cv-btn:hover,
+    .linkedin-btn:hover {
+      background: unset !important;
+      transform: none !important;
+      border-color: unset !important;
+    }
+  }

@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { trigger, state, style, transition, animate, stagger, query } from '@angular/animations';
@@ -67,8 +68,10 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
 export class ProjectsComponent {
  selectedFilter = 'all';
   hasMoreProjects = true;
-  visibleProjects = 6;
+  visibleProjects = 6;  
+  public animationsEnabled = true;
 
+  
   categories = ['Web App', 'Mobile App', 'UI/UX', 'API'];
   // https://picsum.photos/
   projects = [
@@ -77,7 +80,7 @@ export class ProjectsComponent {
       title: 'E-Commerce Platform',
       category: 'Web App',
       description: 'A full-featured e-commerce platform with real-time inventory management, secure payment processing, and advanced analytics dashboard.',
-      image: 'https://fastly.picsum.photos/id/29/4000/2670.jpg?hmac=rCbRAl24FzrSzwlR5tL-Aqzyu5tX_PA95VJtnUXegGU',
+      image: 'https://picsum.photos/id/29/600/300',
       technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe API'],
       year: '2024',
       duration: '4 months',
@@ -90,7 +93,7 @@ export class ProjectsComponent {
       title: 'Task Management App',
       category: 'Mobile App',
       description: 'Cross-platform mobile app for team collaboration with real-time updates, file sharing, and integrated calendar functionality.',
-      image: 'https://fastly.picsum.photos/id/25/5000/3333.jpg?hmac=yCz9LeSs-i72Ru0YvvpsoECnCTxZjzGde805gWrAHkM',
+      image: 'https://picsum.photos/id/25/600/300',
       technologies: ['React Native', 'Firebase', 'Redux', 'Push Notifications'],
       year: '2024',
       duration: '3 months',
@@ -103,7 +106,7 @@ export class ProjectsComponent {
       title: 'Banking Dashboard',
       category: 'UI/UX',
       description: 'Modern and intuitive banking interface design with focus on accessibility, security, and user experience optimization.',
-      image: 'https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g',
+      image: 'https://picsum.photos/id/19/600/300',
       technologies: ['Figma', 'Sketch', 'Principle', 'Adobe XD'],
       year: '2024',
       duration: '2 months',
@@ -116,7 +119,7 @@ export class ProjectsComponent {
       title: 'Social Media API',
       category: 'API',
       description: 'RESTful API for social media platform with authentication, real-time messaging, and scalable architecture.',
-      image: 'https://fastly.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s',
+      image: 'https://picsum.photos/id/13/600/300',
       technologies: ['Node.js', 'Express', 'PostgreSQL', 'Redis'],
       year: '2024',
       duration: '3 months',
@@ -129,7 +132,7 @@ export class ProjectsComponent {
       title: 'Weather Dashboard',
       category: 'Web App',
       description: 'Interactive weather application with location-based forecasts, historical data analysis, and beautiful data visualizations.',
-      image: 'https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ',
+      image: 'https://picsum.photos/id/11/600/300',
       technologies: ['Vue.js', 'Chart.js', 'OpenWeather API', 'Tailwind CSS'],
       year: '2023',
       duration: '1 month',
@@ -142,7 +145,7 @@ export class ProjectsComponent {
       title: 'Fitness Tracker',
       category: 'Mobile App',
       description: 'Comprehensive fitness tracking app with workout plans, nutrition tracking, and progress analytics.',
-      image: 'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68',
+      image: 'https://picsum.photos/id/10/600/300',
       technologies: ['Flutter', 'Dart', 'SQLite', 'Health APIs'],
       year: '2023',
       duration: '5 months',
@@ -160,6 +163,13 @@ export class ProjectsComponent {
   ];
 
   filteredProjects = this.projects;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.animationsEnabled = window.innerWidth > 600;
+    }
+  }
+
 
   ngOnInit() {
     this.filterProjects('all');

@@ -397,3 +397,46 @@
     }
   }
 }
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover for project cards */
+  .projects-section .project-card:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+  }
+
+  /* Disable hover for overlay buttons */
+  .projects-section .project-image-container .project-overlay .overlay-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: none;
+  }
+
+  /* Disable hover for filter buttons */
+  .projects-section .filter-container .filter-btn:hover,
+  .projects-section .filter-container .filter-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Disable hover for project links */
+  .projects-section .project-links .project-link.live-link:hover,
+  .projects-section .project-links .project-link.github-link:hover {
+    background: inherit;
+    transform: none;
+  }
+
+  /* Disable hover for load more button */
+  .projects-section .load-more-btn:hover {
+    transform: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+
+  /* Disable hover for achievement items */
+  .projects-section .achievement-section .achievement-item:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

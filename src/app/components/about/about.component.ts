@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 import { trigger, state, style, transition, animate, stagger, query } from '@angular/animations';
 
 @Component({
@@ -71,7 +72,9 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
   ]
 })
 export class AboutComponent {
-skills = [
+
+  public animationsEnabled = true;
+  skills = [
     {
       name: 'Frontend Development',
       description: 'React, Angular, Vue.js with modern styling',
@@ -100,6 +103,12 @@ skills = [
     { number: '100%', label: 'Client Satisfaction' },
     { number: '24/7', label: 'Support Available' }
   ];
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.animationsEnabled = window.innerWidth > 600;
+    }
+  }
 
   ngOnInit() {
     // Component initialization logic

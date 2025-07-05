@@ -1,23 +1,22 @@
-
-
 .navbar {
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    margin-right: 0px;
-    background:linear-gradient(135deg, #667eeae8 0%, #764ba27a 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0px;
+  background: linear-gradient(135deg, #667eeae8 0%, #764ba27a 100%);
 }
 
-.sectionsStyle{
-    text-decoration: none;
-    color: black;
-    font: optional;
+.sectionsStyle {
+  text-decoration: none;
+  color: black;
+  font: optional;
 }
-.sectionsDimension{
-    margin-right: 15px;
-    margin-left: 15px;
-    font-size:x-large;
-    font-weight: bolder;
+
+.sectionsDimension {
+  margin-right: 15px;
+  margin-left: 15px;
+  font-size: x-large;
+  font-weight: bolder;
 }
 
 .sectionsStyle.sectionsDimension {
@@ -25,31 +24,41 @@
   font-weight: 600;
   font-size: 1.1rem;
   padding: 10px 22px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
   transition: all 0.3s;
   text-decoration: none;
   margin: 0 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .sectionsStyle.sectionsDimension:hover {
-  background: rgba(255,255,255,0.18);
   transform: translateY(-2px) scale(1.04);
   color: #a8edea;
 }
 
+/* Disable hover effect on touch/small screens */
+@media (hover: none) and (pointer: coarse) {
+  .sectionsStyle.sectionsDimension:hover {
+    background: rgba(255, 255, 255, 0.10);
+    transform: none;
+    color: #fff;
+  }
+
+  .theme-control button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: none;
+  }
+}
+
 .theme-control button {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: background 0.3s, transform 0.3s;
 }
 
 .theme-control button:hover {
-  background: rgba(255,255,255,0.22);
+  background: rgba(255, 255, 255, 0.22);
   transform: scale(1.1);
 }
 
@@ -60,11 +69,13 @@
     border-radius: 12px;
     margin: 0 2px;
   }
+
   .theme-control button {
     width: 36px;
     height: 36px;
     padding: 0;
   }
+
   .navbar {
     gap: 8px;
     padding: 4px 8px;
@@ -78,6 +89,7 @@
     border-radius: 10px;
     margin: 0 1px;
   }
+
   .theme-control button {
     width: 28px;
     height: 28px;
@@ -91,6 +103,7 @@
     border-radius: 8px;
     margin: 0 0.5px;
   }
+
   .theme-control button {
     width: 22px;
     height: 22px;

@@ -1,23 +1,38 @@
-<div class="contact-section">
+<div class="contact-section" [@fadeInUp]="animationsEnabled ? 'visible' : ''">
   <div class="container">
     <div class="header">
       <h2 class="section-title">Contact Me</h2>
       <div class="title-underline"></div>
       <p class="section-subtitle">Feel free to reach out for collaborations or just a friendly hello!</p>
     </div>
-    <form class="contact-form">
+    <form class="contact-form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <input type="text" placeholder="Your Name" required>
+        <input formControlName="subject" type="text" placeholder="Your Name*" required>
+        @if(formSubmitted && emailForm.get('subject')?.invalid) {
+        <div class="error-message">
+          Subject is required.
+        </div>
+        }
       </div>
       <div class="form-group">
-        <input type="email" placeholder="Your Email" required>
+        <input formControlName="email" type="email" placeholder="Your Email*" required>
+        @if(formSubmitted && emailForm.get('email')?.invalid) {
+        <div class="error-message">
+          Valid email is required.
+        </div>
+        }
       </div>
       <div class="form-group">
-        <textarea rows="5" placeholder="Your Message" required style="resize: none;"></textarea>
+        <textarea formControlName="message" rows="5" placeholder="Your Message*" required style="resize: none;"></textarea>
+        @if(formSubmitted && emailForm.get('message')?.invalid) {
+        <div class="error-message">
+          Message is required.
+        </div>
+        }
       </div>
       <button type="submit" class="send-btn">Send Message</button>
       <div class="contact-buttons">
-        <a href="../assets/lattaruolo_andrea_cv.pdf" download class="download-cv-btn">
+        <a href="assets/lattaruolo_andrea_cv.pdf" download class="download-cv-btn">
           <i class="fa fa-download"></i> Download CV
         </a>
         <a href="https://www.linkedin.com/in/andrea-lattaruolo-64a8a7170/" target="_blank" rel="noopener"

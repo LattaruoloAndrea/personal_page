@@ -1,13 +1,13 @@
 <mat-toolbar>
   <mat-toolbar-row class="navbar">
-    <img (click)="scrollToElement('home')" src="../assets/images/logo.png" style="width: 48px;height: 48px;" />
+    <img (click)="scrollToElement('home')" src="assets/images/logo.png" style="width: 48px;height: 48px;" />
     <span></span>
-    <div>
+    <div style="display: flex; gap: 8px;">
       <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('about')">{{"About"}}</a>
       <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('projects')">{{"Projects"}}</a>
       <a class="sectionsStyle sectionsDimension" (click)="scrollToElement('contacts')">{{"Contancts"}}</a>
-      <div class="theme-control">
-      </div>
+      <!-- <div class="theme-control">
+      </div> -->
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -82,11 +82,6 @@
     object-fit: cover;
     border: 6px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-      border-color: rgba(255, 255, 255, 0.4);
-    }
   }
 
   .profile-overlay {
@@ -297,5 +292,30 @@
     .stats-section .stats-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects for skill cards */
+  .about-section .skills-container .skill-card:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+  }
+
+  /* Disable hover effects for cta-button */
+  .about-section .cta-button:hover {
+    transform: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+  .about-section .cta-button:hover i {
+    transform: none;
+  }
+
+  /* Disable hover effects for stat items */
+  .about-section .stats-section .stat-item:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
   }
 }

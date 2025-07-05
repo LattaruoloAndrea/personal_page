@@ -1,5 +1,5 @@
     <section class="about-section" [@fadeInUp]="'visible'">
-      <div class="container">
+      <div class="container" [@fadeInUp]="animationsEnabled ? 'visible' : ''">
         <!-- Header -->
         <div class="header" [@slideInLeft]="'visible'">
           <h2 class="section-title">About Me</h2>
@@ -12,7 +12,7 @@
           <div class="profile-container" [@scaleIn]="'visible'">
             <div class="profile-image-wrapper">
               <img 
-                src="../assets/images/duck.jpg" 
+                src="assets/images/duck.jpg" 
                 alt="Profile Picture" 
                 class="profile-image"
               />
